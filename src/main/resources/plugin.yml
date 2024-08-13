@@ -4,3 +4,4 @@ version: ${version}
 api-version: 1.16
 depend:
   - CoreProtect
+folia-supported: true
