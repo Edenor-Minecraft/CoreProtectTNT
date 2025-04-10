@@ -150,6 +150,9 @@ public class Main extends JavaPlugin implements Listener {
     // Any projectile shoot (listener)
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     public void onProjectileLaunch(ProjectileLaunchEvent e) {
+        if (e.getEntity() instanceof WindCharge) {
+            return;
+        }
         if (e.getEntity().getShooter() == null) {
             return;
         }
@@ -330,7 +333,7 @@ public class Main extends JavaPlugin implements Listener {
     public void onBlockIgnite(BlockIgniteEvent e) {
         if (e.getIgnitingEntity() != null) {
             if (e.getIgnitingEntity().getType() == EntityType.PLAYER) {
-                probablyCache.put(e.getBlock().getLocation(), e.getPlayer().getName());
+                probablyCache.put(e.getBlock().getLocation(), Objects.requireNonNull(e.getPlayer()).getName());
                 // Don't add it to probablyIgnitedThisTick because it's the simplest case and is logged by Core Protect
                 return;
             }
